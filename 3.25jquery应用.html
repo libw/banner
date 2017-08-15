@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        section{
+            width: 321px;height: 200px;
+            border: 1px solid #000;
+            margin: 0 auto;overflow: hidden;
+        }
+        nav{
+            width: 107px;height: 30px;
+            border: 1px solid #000;
+            box-sizing: border-box;
+            float: left;text-align: center;
+            line-height: 30px;
+            cursor: pointer;
+        }
+        nav:nth-child(1){
+            background-color: #ccc;
+        }
+        div{
+            width: 321px;height: 200px;
+        }
+        div>a{
+            display: block;
+        }
+        div>a>img{
+            width: 321px;height: 200px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<section>
+
+    <nav class="nav">1</nav>
+    <nav class="nav">2</nav>
+    <nav class="nav">3</nav>
+    <div class="con">
+        <a href="">
+            <img src="1.jpg" alt="">
+        </a>
+    </div>
+    <div class="con">
+        <a href="">
+            <img src="2.jpg" alt="">
+        </a>
+    </div>
+    <div class="con">
+        <a href="">
+            <img src="3.jpg" alt="">
+        </a>
+    </div>
+</section>
+</body>
+<script src="jquery.js"></script>
+<script>
+   $(function () {//获取当前操作
+       $(".nav").click(function () {
+//           $(this).index();
+            var index=$(this).index();
+            $(".nav").css("background","#fff").eq(index).css("background","#ccc");
+            $(".con").css("display","none").eq(index).css("display","block")
+
+       })
+   });
+//    $(document).ready(function () {//获取前的操作
+//
+//    })
+</script>
+</html>

@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .container{
+            width: 400px;height: 100px;
+            border: 1px solid #000;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        .long{
+            width: 800px;
+        }
+
+        .prev,.next{
+            width: 10px;height: 100px;
+            line-height: 100px;text-align: center;
+            font-size: 10px;color: #000;
+            position: absolute;top: 0;
+            cursor: pointer;
+            display: none;
+        }
+        .prev{
+            left: 0;
+        }
+        .next{
+            right: 0;
+        }
+        ul,li,body{
+            margin: 0;padding: 0;
+            list-style: none;
+
+        }
+        li{
+            width: 80px;height: 100px;
+            margin: 0 10px;background-color: #1fb6ea;
+            float: left;
+        }
+        .inner{
+            width: 1600px;height: 100px;
+            transform: translateX(-400px);
+            transition: all 0.5s cubic-bezier(0.360, 0.280, 0.380, 1.210);
+        }
+        .long1{
+            width: 3200px;
+            transform: translateX(-800px);
+        }
+    </style>
+    <script src="hover.js"></script>
+    <script>
+        window.onload=function () {
+            var container=document.querySelectorAll('.container');
+            var inner=document.querySelectorAll('.inner');
+            var lis=document.querySelectorAll('.inner>li');
+            var prev=document.querySelectorAll('.prev');
+            var next=document.querySelectorAll('.next');
+            var num=1;
+            var flag=true;
+            Array.from(container).forEach(function (v,i) {
+                lunbo(v,inner[i],prev[i],next[i])
+            });
+            console.log(lis.length);
+            function lunbo(container,inner,prev,next) {
+                var l=container.offsetWidth;
+                hover(container,function () {
+                    prev.style.display='block';
+                    next.style.display='block';
+                },function () {
+                    prev.style.display='none';
+                    next.style.display='none';
+                });
+                next.onclick=function () {
+                    if(flag) {
+                        flag=false;
+                        num++;
+                        inner.style.transition = 'all 0.5s cubic-bezier(0.360, 0.280, 0.380, 1.210)';
+                        inner.style.transform = `translateX(${-num * l}px)`;
+                    }
+                };
+                prev.onclick=function () {
+                    if(flag){
+                        flag=false;
+                        num--;
+                        inner.style.transition='all 0.5s cubic-bezier(0.360, 0.280, 0.380, 1.210)';
+                        inner.style.transform=`translateX(${-num*l}px)`;
+                    }
+                };
+                inner.addEventListener('transitionend',function () {
+                    if(num==3){
+                        num=1;
+                        inner.style.transition='none';
+                        inner.style.transform=`translateX(${-num*l}px)`;
+                    }
+                    if(num==0){
+                        num=2;
+                        inner.style.transition='none';
+                        inner.style.transform=`translateX(${-num*l}px)`;
+                    }
+                    flag=true;
+                });
+            }
+
+
+//
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <ul class="inner">
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+    <div class="prev"><</div>
+    <div class="next">></div>
+</div>
+<div class="container">
+    <ul class="inner">
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+    <div class="prev"><</div>
+    <div class="next">></div>
+</div>
+<div class="container">
+    <ul class="inner">
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+    <div class="prev"><</div>
+    <div class="next">></div>
+</div>
+<div class="container long">
+    <ul class="inner long1">
+        <li>9</li>
+        <li>10</li>
+        <li>11</li>
+        <li>12</li>
+        <li>13</li>
+        <li>14</li>
+        <li>15</li>
+        <li>16</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+        <li>11</li>
+        <li>12</li>
+        <li>13</li>
+        <li>14</li>
+        <li>15</li>
+        <li>16</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+    </ul>
+    <div class="prev"><</div>
+    <div class="next">></div>
+</div>
+</body>
+</html>

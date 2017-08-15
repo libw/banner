@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>手机轮播</title>
+    <script src="zepto.js"></script>
+    <style>
+        body,html{
+            margin: 0;
+            padding: 0;
+        }
+        .banner{
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+        }
+        .banners{
+            width: 400%;
+            height: auto;
+            border: 1px solid #000;
+
+        }
+        .banners>a{
+            float: left;
+            width: 25%;
+        }
+        .banners>a>img{
+
+            width: 100%;
+
+        }
+    </style>
+    <script>
+        $(function () {
+            var lis=document.querySelector(".banners");
+            var inner=document.querySelectorAll(".banners>a");
+            var cw=window.innerWidth;
+            console.log(cw);
+            var dx=0;
+            var ex=0;
+            var mx=0;
+            var mmx=0;
+            var index=0;
+            lis.addEventListener("touchstart",function (e) {
+                var dt=e.timeStamp;
+                lis.style.transition="none";
+                console.log(e);
+                dx=e.changedTouches[0].clientX;
+                document.addEventListener("touchmove",move);
+                document.addEventListener("touchend",end);
+                function move(e) {
+                    ex=e.changedTouches[0].clientX;
+                    mx=ex-dx;
+                    console.log(mx);
+
+                    lis.style.transform=`translateX(${mx+mmx}px)`;
+
+                }
+
+                function end(e) {
+                    lis.style.transition="all 0.5s";
+                    var et=e.timeStamp;
+                    var mt=et-dt;
+                    console.log(mt);
+                    var n=index;
+                    if(Math.abs(mx)>cw/3||(mt<300&&Math.abs(mx)>20)){
+                        if(mx<0){
+                            index++;
+                        }else {
+                            index--;
+                        }
+                        if(index<0||index>inner.length-1){
+                            index=n;
+                        }
+                    }else {
+
+                    }
+                    console.log(index);
+                    mmx=-index*cw;
+                    lis.style.transition="all 0.5s";
+                    lis.style.transform=`translateX(${mmx}px)`;
+                    document.removeEventListener("touchmove",move);
+                    document.removeEventListener("touchend",end);
+                }
+            });
+
+
+
+
+//
+        })
+    </script>
+</head>
+<body>
+    <div class="banner">
+        <div class="banners">
+            <a href="javascript:;">
+                <img src="2.jpg" alt="">
+            </a>
+            <a href="javascript:;">
+                <img src="3.jpg" alt="">
+            </a>
+            <a href="javascript:;">
+                <img src="4.jpg" alt="">
+            </a>
+            <a href="javascript:;">
+                <img src="5.jpg" alt="">
+            </a>
+
+        </div>
+    </div>
+</body>
+</html>

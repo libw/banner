@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Document</title>
+    <style>
+        body,ul,li{
+            margin: 0;padding: 0;list-style: none;
+        }
+        section{
+            width: 100%;height: 199px;
+            overflow: hidden;
+        }
+        li{
+            width: 25%;height: 199px;
+            float: left;
+        }
+        ul{
+            width: 400%;height: 199px;
+        }
+        img{
+            width: 100%;height: 199px;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            var div=document.querySelector('ul');
+            var startX=0;
+            var moveX=0;
+            var mx=0;
+            var width;
+            window.onresize=function () {
+                width=window.innerWidth;
+            };
+            var dir='right';
+            var lis=document.querySelectorAll('li');
+            var i=0;
+            var st,et;
+            div.addEventListener('touchstart',function (e) {
+                div.style.transition='none';
+                st=e.timeStamp;
+                startX=e.changedTouches[0].clientX;
+            });
+            div.addEventListener('touchmove',function (e) {
+                var nx=e.changedTouches[0].clientX;
+                moveX=nx-startX;
+                if(moveX<0){
+                    dir='left'
+                }else{
+                    dir='right'
+                }
+                div.style.transform=`translateX(${moveX+mx}px)`;
+            });
+            div.addEventListener('touchend',function (e) {
+                et=e.timeStamp;
+                var time=et-st;
+//                console.log(time);
+                var n=i;
+                dir=moveX>0?'right':'left';
+                if(Math.abs(moveX)>width/3||(time<300&&Math.abs(moveX)>30)){
+                    //              div.style.transform=`translateX(${-width}px)`
+                    if(dir=='left'){
+                        i++;
+                    }else  if(dir=='right'){
+                        i--;
+                    }
+
+                    if(i<0||i>lis.length-1){
+                        i=n
+                    }
+                }else{
+               //                    div.style.transform=`translateX(0)`;
+                }
+                mx=-i*width;
+                div.style.transition='all 0.5s';
+                div.style.transform=`translateX(${mx}px)`;
+            });
+//
+        };
+    </script>
+</head>
+<body>
+<section>
+    <ul>
+        <li><img src="1.jpg" alt=""></li>
+        <li><img src="2.jpg" alt=""></li>
+        <li><img src="3.jpg" alt=""></li>
+        <li><img src="4.jpg" alt=""></li>
+    </ul>
+</section>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        section{
+            width: 321px;height: 230px;
+            border: 1px solid #000;
+            margin: 0 auto;
+            position: relative;
+        }
+        nav{
+            width: 107px;height: 30px;
+            border: 1px solid #000;
+            box-sizing: border-box;
+            float: left;text-align: center;
+            line-height: 30px;
+            cursor: pointer;z-index: 1;
+
+        }
+        nav:nth-child(1){
+            background-color: gray;
+        }
+        div{
+            width: 321px;height: 200px;
+            position: absolute;left: 0;
+            top: 30px;opacity: 0;
+            transition: all 0.5s ease-in;
+
+        }
+        div>a{
+            display: block;
+        }
+        div>a>img{
+            width: 321px;height: 200px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<section>
+
+    <nav class="nav">1</nav>
+    <nav class="nav">2</nav>
+    <nav class="nav">3</nav>
+    <div class="con" style="opacity: 1;z-index: 1">
+        <a href="">
+            <img src="1.jpg" alt="">
+        </a>
+    </div>
+    <div class="con">
+        <a href="">
+            <img src="2.jpg" alt="">
+        </a>
+    </div>
+    <div class="con">
+        <a href="">
+            <img src="3.jpg" alt="">
+        </a>
+    </div>
+</section>
+</body>
+<script>
+    var div1=document.getElementsByClassName('nav');
+    //一般后面要加下标，但是这里因为要全部选定
+    var div2=document.getElementsByClassName('con');
+    for(let i=0;i<div1.length;i++){
+        div1[i].onmouseover=function () {
+            for(let j=0;j<div1.length;j++){
+                div1[j].style.backgroundColor='transparent';
+                div2[j].style.zIndex='0';
+                div2[j].style.opacity='0';
+            }
+            div1[i].style.backgroundColor='gray';
+            div2[i].style.zIndex='1';
+            div2[i].style.opacity='1';
+        }
+    }
+</script>
+</html>

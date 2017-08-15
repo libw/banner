@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        section{
+            width: 321px;height: 230px;
+            border: 1px solid #000;
+            margin: 0 auto;
+            position: relative;
+        }
+        nav{
+            width: 53px;height: 30px;
+            border: 1px solid #000;
+            box-sizing: border-box;
+            float: left;text-align: center;
+            line-height: 30px;
+            cursor: pointer;z-index: 1;
+
+        }
+        nav:nth-child(1){
+            background-color: gray;
+        }
+        .con{
+            width: 321px;height: 200px;
+            position: absolute;left: 0;
+            top: 30px;opacity: 0;
+            transition: all 0.5s ease-in;
+
+        }
+        .con>a{
+            display: block;
+        }
+        .con>a>img{
+            width: 321px;height: 200px;
+            display: block;
+        }
+        .zuo{
+
+            width: 20px;
+            height: 20px;
+            font-size: 18px;
+            position: absolute;
+            left: 0;
+            top:50px;
+            z-index: 2;
+            color: #fff;cursor: pointer;
+        }
+        .you{
+
+            color: #fff;
+            width: 20px;
+            height: 20px;
+            font-size: 18px;
+            position: absolute;
+            right: 0;
+            top:50px;
+            z-index: 2;cursor: pointer;
+        }
+    </style>
+    <script>
+        window.onload=function () {
+
+            var div1=document.getElementsByClassName('nav');
+            //一般后面要加下标，但是这里因为要全部选定
+            var div2=document.getElementsByClassName('con');
+            for(let i=0;i<div1.length;i++){
+                div1[i].onmouseover=function () {
+                    for(let j=0;j<div1.length;j++){
+                        div1[j].style.backgroundColor='transparent';
+                        div2[j].style.zIndex='0';
+                        div2[j].style.opacity='0';
+                    }
+                    div1[i].style.backgroundColor='gray';
+                    div2[i].style.zIndex='1';
+                    div2[i].style.opacity='1';
+                    num=i
+                };
+            }
+
+            var num=0;
+            var t1=setInterval(move,1000);
+                function move () {
+                num++;
+                if (num==div1.length){
+                    num=0;
+                }
+                if(num==-1){
+                    num=5
+                }
+                for(let j=0;j<div1.length;j++){
+                    div1[j].style.backgroundColor='transparent';
+                    div2[j].style.zIndex='0';
+                    div2[j].style.opacity='0';
+                }
+                div1[num].style.backgroundColor='gray';
+                div2[num].style.zIndex='1';
+                div2[num].style.opacity='1';
+            }
+            var banner=document.getElementsByClassName('banner')[0];
+            banner.onmouseover=function (){
+                clearInterval(t1)
+            };
+            banner.onmouseout=function (){
+               t1=setInterval(move,1000)
+            };
+
+            var zuo=document.getElementsByClassName('zuo')[0];
+            var you=document.getElementsByClassName('you')[0];
+            zuo.onclick=function (){
+                num=num-2;
+                move();
+            };
+            you.onclick=function (){
+                move();
+            };
+
+        }
+    </script>
+</head>
+
+<body>
+<section class="banner">
+
+    <nav class="nav">1</nav>
+    <nav class="nav">2</nav>
+    <nav class="nav">3</nav>
+    <nav class="nav">4</nav>
+    <nav class="nav">5</nav>
+    <nav class="nav">6</nav>
+
+    <div class="con" style="opacity: 1;z-index: 1">
+        <a href="">
+            <img src="1.jpg" alt="">
+        </a>
+    </div>
+    <div class="con">
+        <a href="">
+            <img src="2.jpg" alt="">
+        </a>
+    </div>
+    <div class="con">
+        <a href="">
+            <img src="3.jpg" alt="">
+        </a>
+    </div>
+    <div class="con" >
+        <a href="">
+            <img src="4.jpg" alt="">
+        </a>
+    </div>
+    <div class="con">
+        <a href="">
+            <img src="5.jpg" alt="">
+        </a>
+    </div>
+    <div class="con">
+        <a href="">
+            <img src="6.jpg" alt="">
+        </a>
+    </div>
+
+    <div class="zuo">左</div>
+    <div class="you">右</div>
+</section>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        section{
+            width: 321px;height: 230px;
+            border: 1px solid #000;
+            margin: 0 auto;
+            position: relative;
+        }
+        nav{
+            width: 53px;height: 30px;
+            border: 1px solid #000;
+            box-sizing: border-box;
+            float: left;text-align: center;
+            line-height: 30px;
+            cursor: pointer;z-index: 1;
+
+        }
+
+        .con{
+            width: 321px;height: 200px;
+            position: absolute;left: 0;
+            top: 30px;opacity: 0;
+            /*transition: all 0.5s ease-in;*/
+
+        }
+        .con>a{
+            display: block;
+        }
+        .con>a>img{
+            width: 321px;height: 200px;
+            display: block;
+        }
+        .zuo{
+
+            width: 20px;
+            height: 20px;
+            font-size: 18px;
+            position: absolute;
+            left: 0;
+            top:50px;
+            z-index: 2;
+            color: #fff;cursor: pointer;
+        }
+        .you{
+
+            color: #fff;
+            width: 20px;
+            height: 20px;
+            font-size: 18px;
+            position: absolute;
+            right: 0;
+            top:50px;
+            z-index: 2;cursor: pointer;
+        }
+        .active{
+            background-color: #3aaddf;
+        }
+    </style>
+    <script src="jquery.js"></script>
+    <script>
+        $(function () {
+
+            $(".nav").each(function (i) {
+                $(".nav").mouseover(function () {
+//                //1
+//                $(".nav").removeClass("active");
+//                $(this).addClass("active")
+                    //2
+//
+//                $(".nav").removeClass("active").filter(this).addClass("active");
+                    //3
+//                $(this).addClass("active");
+//                $(".nav").not(this).removeClass("active")
+                    //4
+
+                    var index=$(this).index();
+                    $(".nav").filter(".active").removeClass("active").end().filter(this).addClass("active");
+                    $(".con").css({
+                        opacity: 0.5,
+                        zIndex:1
+                    });
+                    $(".con").eq(index).css({
+
+                        zIndex:2
+
+                    }).animate({opacity: 1},1000);
+                    num=i
+                });
+
+            });
+
+            var num=0;
+            var t1=setInterval(move,1000);
+            function move() {
+
+                num++;
+                if(num>5){
+                    num=0
+                }
+                $(".nav").removeClass("active");
+                $(".nav").eq(num).addClass("active");
+                $(".con").css({
+                    opacity: 0,
+                    zIndex:1
+                });
+                $(".con").eq(num).css({
+
+                    zIndex:2
+                }).animate({opacity: 1},1000)
+            }
+            $(".banner").mouseover(function () {
+                        clearInterval(t1)
+            }).mouseout(function () {
+                        t1=setInterval(move,1000)
+            });
+            $(".you").click(move);
+            $(".zuo").click(
+                    function move() {
+
+                        num-=1;
+                        if(num==-1){
+                            num=5
+                        }
+
+                        $(".nav").removeClass("active");
+                        $(".nav").eq(num).addClass("active");
+                        $(".con").css({
+                            opacity: 0,
+                            zIndex:1
+                        });
+                        $(".con").eq(num).css({
+
+                            zIndex:2
+                        }).animate({opacity: 1},1000)
+                    }
+
+            );
+
+        })
+    </script>
+</head>
+
+<body>
+<section class="banner">
+
+    <nav class="nav active">1</nav>
+    <nav class="nav">2</nav>
+    <nav class="nav">3</nav>
+    <nav class="nav">4</nav>
+    <nav class="nav">5</nav>
+    <nav class="nav">6</nav>
+
+    <div class="con" style="opacity: 1;z-index: 1">
+        <a href="">
+            <img src="1.jpg" alt="">
+        </a>
+    </div>
+    <div class="con">
+        <a href="">
+            <img src="2.jpg" alt="">
+        </a>
+    </div>
+    <div class="con">
+        <a href="">
+            <img src="3.jpg" alt="">
+        </a>
+    </div>
+    <div class="con" >
+        <a href="">
+            <img src="4.jpg" alt="">
+        </a>
+    </div>
+    <div class="con">
+        <a href="">
+            <img src="5.jpg" alt="">
+        </a>
+    </div>
+    <div class="con">
+        <a href="">
+            <img src="6.jpg" alt="">
+        </a>
+    </div>
+
+    <div class="zuo">左</div>
+    <div class="you">右</div>
+</section>
+</body>
+</html>

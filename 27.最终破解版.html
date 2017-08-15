@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+   window.onload=function(){
+     var inner=document.querySelector(".inner");
+     var t1=setInterval(move,2000);
+     var num=1;
+     function move(){
+        flag1=false;
+        if(num==1||num==6||num==8){
+          inner.style.transition="all 0.5s";
+        }
+        num++;
+        inner.style.left=-num*200+"px";
+     }
+     inner.addEventListener("transitionend",function(){
+        if(num==9){
+           inner.style.transition="none";
+           inner.style.left="-200px";
+           num=1;
+        }
+        if(num==0){
+           inner.style.transition="none";
+           inner.style.left="-1600px";
+           num=8;
+        }
+         flag1=true;
+     });
+      var box=document.querySelector(".box");
+         box.onmouseover=function(){
+            clearInterval(t1)
+         };
+         box.onmouseout=function(){
+           t1=setInterval(move,2000)
+         };
+       var prev=document.querySelector(".prev");
+       var next=document.querySelector(".next");
+        var flag1=true;
+        next.onclick=function(){
+           if(flag1){
+            move();
+           }
+        };
+        prev.onclick=function(){
+            if(flag1){
+            num-=2;
+            move();
+            }
+        };
+//  结束
+   }
+    </script>
+    <style>
+        .box{
+            width:800px;height:200px;
+            margin:0 auto;
+            border:1px solid red;
+            overflow:hidden;
+            position:relative;
+        }
+        .inner{
+            width:2600px;height:200px;
+            background:#ccc;
+            position: absolute;
+            left:-200px;top:0;
+            transition:all 0.5s;
+        }
+        .item{
+            width:190px;height:200px;
+            background:orange;
+            color:#fff;
+            font-size: 30px;
+            text-align: center;
+            line-height: 200px;
+            float:left;
+            margin-right:10px;
+        }
+        .prev,.next{
+            width:30px;height:30px;
+            position: absolute;
+            top:85px;
+            background:red;
+        }
+        .prev{
+            left:0;
+        }
+        .next{
+            right:0;
+        }
+    </style>
+</head>
+<body>
+  <div class="box">
+      <div class="inner">
+          <div class="item">8</div>
+          <div class="item">1</div>
+          <div class="item">2</div>
+          <div class="item">3</div>
+          <div class="item">4</div>
+          <div class="item">5</div>
+          <div class="item">6</div>
+          <div class="item">7</div>
+          <div class="item">8</div>
+          <div class="item">1</div>
+          <div class="item">2</div>
+          <div class="item">3</div>
+          <div class="item">4</div>
+      </div>
+      <div class="prev">&lt;</div>
+      <div class="next">&gt;</div>
+  </div>
+</body>
+</html>

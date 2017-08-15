@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        ul{
+            padding: 0;margin: 0;
+            list-style: none;
+        }
+        .banner{
+            width: 319px;height: 200px;
+            border: 1px solid #000;
+            margin: 0 auto;
+            /*overflow: hidden;*/
+        }
+        .banner1{
+            width: 1600px;height: 200px;
+            /*margin-left: -319px;*/
+            transition: all 1s;
+        }
+        .banner li{
+            float: left;
+        }
+    </style>
+    <script>
+        window.onload=function () {
+
+            var banner1=document.querySelector('.banner1');
+
+            var num=0;
+            setInterval(function () {
+                banner1.style.transition='all 1s';
+                num++;
+//                if(num==5){
+//                    num=0;
+//                }
+                banner1.style.marginLeft=-319*num+'px';
+            },3000);
+            banner1.addEventListener("transitionend",function () {
+                if(num==4){
+                    banner1.style.transition="none";
+                    banner1.style.marginLeft='0';
+                    num=0;
+                }
+            });
+
+//            var banner1=document.querySelector('.banner1');
+//            var num=0;
+//            setInterval(function () {
+//                banner1.style.transition='all 1s';
+//                num++;
+////                if(num==5){
+////                    num=0;
+////                }
+//                banner1.style.backgroundColor='';
+//            },3000);
+//            banner1.addEventListener("transitionend",function () {
+//                if(num==4){
+//                    banner1.style.transition="none";
+//                    banner1.style.marginLeft='0';
+//                    num=0;
+//                }
+//            })
+
+
+        };
+    </script>
+</head>
+<body>
+    <section class="banner">
+        <ul class="banner1">
+            <li><img src="1.jpg" alt=""></li>
+            <li><img src="2.jpg" alt=""></li>
+            <li><img src="3.jpg" alt=""></li>
+            <li><img src="4.jpg" alt=""></li>
+            <li><img src="1.jpg" alt=""></li>
+        </ul>
+    </section>
+</body>
+</html>

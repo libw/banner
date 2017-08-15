@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .banner{
+            width: 500px;height: 350px;
+            border: 1px solid #000;
+            position: absolute;
+            left: 0;right: 0;
+            margin: auto;
+            /*overflow: hidden;*/
+        }
+        .banner1{
+            width: 500px;height: 350px;
+            text-align: center;
+            line-height: 350px;
+            font-size: 50px;color: #000;
+            position: absolute;
+            left: 0;top:0;
+            z-index: 0;
+        }
+        .banner1:first-child{
+            z-index: 1;
+            background-color: red;
+        }
+        .banner1:nth-child(2){
+            background-color: orange;
+        }
+        .banner1:nth-child(3){
+            background-color: yellow;
+        }
+        .banner1:nth-child(4){
+            background-color: green;
+        }
+        .banner1:nth-child(5){
+            background-color: blueviolet;
+        }
+        .banner1:nth-child(6){
+            background-color: purple;
+        }
+        .circle{
+            width: 180px;height: 20px;
+            position: absolute;
+            top: 300px;left: 160px;
+            z-index: 9999;
+        }
+        .circle1{
+            width: 20px;height: 20px;
+            background-color: gray;
+            margin: 0 5px;float: left;
+            border-radius: 50%;
+        }
+        .circle1:first-child{
+            background-color: #fff
+        }
+        .zuo{
+            width: 40px;height: 40px;
+            background-color: #0b1018;
+            color: #fff;position: absolute;
+            left: 0;top: 160px;
+            z-index: 80;text-align: center;
+            line-height: 40px;
+        }
+        .you{
+            width: 40px;height: 40px;
+            background-color: #0b1018;
+            color: #fff;position: absolute;
+            right: 0;top: 160px;
+            z-index: 80;text-align: center;
+            line-height: 40px;
+        }
+    </style>
+    <script src="animate.js"></script>
+    <script>
+        window.onload=function () {
+            var lis=document.querySelectorAll('.banner1');
+            var cc=document.querySelectorAll('.circle1');
+            var banner=document.querySelector('.banner');
+            var zuo=document.querySelector('.zuo');
+            var you=document.querySelector('.you');
+            var num=0;
+            var z=1;
+            var now=0;
+            var t1=setInterval(move,2000);
+            function move() {
+                flag=false;
+                num++;
+                if(num==6){
+                    num=0
+                }
+                if(num==-1){
+                    num=5
+                }
+                lis[num].style.left='500px';
+                lis[num].style.zIndex=z++;
+                animate(lis[num],{left:0},1000,function () {
+                    flag=true;
+                });
+                animate(lis[now],{left:-500},1000,function () {
+                    flag=true;
+                });
+                now=num;
+
+                for(var i=0;i<lis.length;i++){
+                    cc[i].style.backgroundColor='gray';
+                }
+                cc[num].style.backgroundColor='#fff';
+
+            }
+
+            banner.onmouseover=function () {
+                clearInterval(t1)
+            };
+            banner.onmouseout=function () {
+                t1=setInterval(move,2000);
+
+            };
+            var flag=true;
+            zuo.onclick=function (){
+                if(flag){
+                n=-1;
+                num=num-2;
+                move1();
+                function move1(){
+                    flag=false;
+                    num++;
+                    if(num==-1){
+                        num=5
+                    }
+                    for(var j=0;j<lis.length;j++){
+                        cc[j].style.backgroundColor='gray';
+                    }
+                    cc[num].style.backgroundColor='#fff';
+                    lis[num].style.left=n*500+'px';
+                    lis[num].style.zIndex=z++;
+                    animate(lis[num],{left:0},1000,function () {
+                        flag=true;
+                    });
+                    animate(lis[now],{left:-n*500},1000,function () {
+                        flag=true;
+                    });
+                    now=num;
+                }
+
+                }
+            };
+            you.onclick=function (){
+                if(flag){
+                move();}
+            };
+            var n=1;
+
+            cc.forEach(function (v,i) {
+                console.log(flag);
+                v.onclick=function () {
+                    if(flag){
+                    flag=false;
+                    console.log(flag);
+                    if(i>now){
+                        n=1
+                    }else if(i<now){
+                        n=-1
+                    }else {
+                        return
+                    }
+                    for(var j=0;j<lis.length;j++){
+                    cc[j].style.backgroundColor='gray';
+                }
+                    cc[i].style.backgroundColor='#fff';
+                    lis[i].style.left=n*500+'px';
+                    lis[i].style.zIndex=z++;
+                    animate(lis[i],{left:0},1000,function () {
+                        flag=true;
+                    });
+                    animate(lis[now],{left:-n*500},1000,function () {
+                        flag=true;
+                    });
+                    now=i;
+                    num=i;
+                }}
+            })
+
+
+        }
+    </script>
+</head>
+<body>
+<section class="banner">
+    <div class="banner1">1</div>
+    <div class="banner1">2</div>
+    <div class="banner1">3</div>
+    <div class="banner1">4</div>
+    <div class="banner1">5</div>
+    <div class="banner1">6</div>
+    <div class="circle">
+        <div class="circle1"></div>
+        <div class="circle1"></div>
+        <div class="circle1"></div>
+        <div class="circle1"></div>
+        <div class="circle1"></div>
+        <div class="circle1"></div>
+    </div>
+    <div class="zuo"><</div>
+    <div class="you">></div>
+</section>
+</body>
+</html>
